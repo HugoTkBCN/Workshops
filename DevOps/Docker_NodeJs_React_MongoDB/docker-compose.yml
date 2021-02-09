@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    volumes:
+        - ./data-node:/data/db
+    ports:
+        - "8080:8080"
+    networks:
+      - template_network
+
+  server:
+    container_name: server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: template/server
+    depends_on:
+      - mongodb
+    environment:
+      - REACT_APP_SERVER_PORT=${APP_PORT}
+      - MONGODB_IP=${MONGODB_IP}
+      - MONGODB_PORT=${MONGODB_PORT}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '${APP_PORT}:${APP_PORT}'
+    networks:
+      - template_network
+
+  client_web:
+    container_name: client_web
+    build:
+      context: ./client_web
+      dockerfile: Dockerfile
+    image: template/client_web
+    depends_on:
+      - server
+    environment:
+      - REACT_APP_BACKEND_HOST_IP=backend
+      - REACT_APP_SERVER_PORT=${APP_PORT}
+      - REACT_APP_NODE_PATH=${REACT_APP_NODE_PATH}
+      - PORT=${FRONT_PORT}
+    volumes:
+      - ./client_web:/usr/src/app/
+      - /usr/src/app/node_modules
+    ports:
+      - '${FRONT_PORT}:${FRONT_PORT}'
+    networks:
+      - template_network
+
+networks:
+  template_network:
+    driver: bridge

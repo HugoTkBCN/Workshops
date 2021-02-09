@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+
+import sys
+
+def decrypt(message):
+    decrypted = ""
+    for letter in message :
+        if (letter.isalpha()):
+            tmp = ord(letter) - 3
+            if ((tmp < 97 and tmp > 90) or (tmp < 65)):
+                tmp += 26
+            letter = chr(tmp)
+        decrypted += letter
+    return (decrypted)
+
+def main(ac, av):
+    if (ac != 2):
+        return (84)
+    decrypted = decrypt(av[1])
+    print(decrypted)
+    return (0)
+
+sys.exit(main(len(sys.argv), sys.argv))

@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+
+import sys
+
+def encrypt(message):
+    crypted = ""
+    for letter in message :
+        if (letter.isalpha()):
+            tmp = ord(letter) + 3
+            if ((tmp > 97 and tmp > 122) or (tmp > 65 and tmp > 90 and tmp < 97)):
+                tmp -= 26
+            letter = chr(tmp)
+        crypted += letter
+    return (crypted)
+
+def main(ac, av):
+    if (ac != 2):
+        return (84)
+    crypted = encrypt(av[1])
+    print(crypted)
+    return (0)
+
+sys.exit(main(len(sys.argv), sys.argv))
