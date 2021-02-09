@@ -5,7 +5,5 @@ services:
         restart: always
         volumes:
             - ./html:/var/www/html
-        environment:
-            - myenvvar="hello"
         ports:
-            - "3000:80"
+            - "80:80"
