@@ -18,16 +18,29 @@ if ($validUser) {
 
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="stylesheet" href="style.css">
   <title>Login</title>
 </head>
 
 <body>
-  <form name="input" action="" method="post">
-    <label for="username">Username:</label><input type="text" value="<?= $_POST["username"] ?>" id="username" name="username" />
-    <label for="password">Password:</label><input type="password" value="" id="password" name="password" />
-    <div class="error"><?= $errorMsg ?></div>
-    <input type="submit" value="Login" name="sub" />
-  </form>
+  <div class="container" id="container">
+    <div class="form-container">
+      <form name="input" action="" method="post">
+        <h1>Sign in</h1>
+        <input type="text" placeholder="Username" value="<?= $_POST["username"] ?>" id="username" name="username" />
+        <input type="password" placeholder="Password" value="" id="password" name="password"/>
+        <div class="error"><?= $errorMsg ?></div>
+        <a href="#">Forgot your password?</a>
+        <button name="sub">Sign In</button>
+      </form>
+    </div>
+  </div>
+  <footer>
+    <p>
+      Created by
+      <a target="_blank" href="https://hugolachkar.com">Hugo Lachkar</a>
+    </p>
+  </footer>
 </body>
 
 </html>

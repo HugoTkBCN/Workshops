@@ -14,13 +14,14 @@ if (!$validUser) {
 
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="stylesheet" href="style.css">
   <title>home</title>
 </head>
 
 <body>
   <h1>Home</h1>
   <form name="disconect" action="" method="post">
-    <input type="submit" value="Disconnect" name="disc" />
+    <button name="disc">Sign Out</button>
   </form>
 </body>
 
